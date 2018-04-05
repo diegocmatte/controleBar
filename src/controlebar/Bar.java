@@ -9,7 +9,7 @@ package controlebar;
  *
  * @author 08104810
  */
-public class ControleBar {
+public class Bar {
 
     /**
      * @param args the command line arguments
