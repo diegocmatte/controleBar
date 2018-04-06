@@ -9,6 +9,7 @@ import controlebar.persistence.Cliente;
 import controlebar.persistence.Socio;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ import java.util.Scanner;
 public class Bar {
 
     private ArrayList<Cliente> listaClientes;
-    private File file = new File("lista.txt");
+    private final File file = new File("lista.txt");
 
     public Bar(ArrayList<Cliente> listaClientes) {
         listaClientes = new ArrayList<>();
@@ -111,7 +112,7 @@ public class Bar {
         try {
             ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
             output.writeObject(listaClientes);
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e.toString());
         }
     }
