@@ -21,10 +21,12 @@ import java.util.Scanner;
 public class Bar {
 
     private ArrayList<Cliente> listaClientes;
+    private ArrayList<Cliente> listaClientesSaida;
     private final File file = new File("lista.txt");
 
-    public Bar(ArrayList<Cliente> listaClientes) {
+    public Bar() {
         listaClientes = new ArrayList<>();
+        listaClientesSaida = new ArrayList<>();
     }
 
     public void registraEntrada() {
@@ -35,10 +37,18 @@ public class Bar {
         String cpf = sc.next();
         System.out.print("Digite sua idade: ");
         int idade = sc.nextInt();
-        System.out.print("Digite o seu genero (H ou M): ");
+        System.out.print("Digite o seu genero (H/M): ");
         Character genero = sc.next().charAt(0);
 
-        listaClientes.add(new Cliente(nome, cpf, idade, genero));
+        System.out.println("Deseja colocar no programa de milhagens (S/N)?: ");
+        String resposta = sc.next();
+        if (resposta.equalsIgnoreCase("s")) {
+            System.out.print("Digite o número de sócio: ");
+            int nroSocio = sc.nextInt();
+            listaClientes.add(new Socio(nome, cpf, idade, genero, nroSocio));
+        } else {
+            listaClientes.add(new Cliente(nome, cpf, idade, genero));
+        }
     }
 
     public void exibirClientesETotalClientes() {
@@ -93,13 +103,11 @@ public class Bar {
         }
     }
 
-    public void registraSaida() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Digite seu CPF (apenas números): ");
-        String cpf = sc.next();
+    public void registraSaida(String cpf) {
         for (Cliente c : listaClientes) {
             if (c.getCpf().equals(cpf)) {
-                registraClientesArquivo();
+                //registraClientesArquivo();
+                listaClientesSaida.add(c);
                 listaClientes.remove(c);
                 break;
             } else {
@@ -112,6 +120,7 @@ public class Bar {
         try {
             ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
             output.writeObject(listaClientes);
+            output.writeObject(listaClientesSaida);
         } catch (IOException e) {
             System.out.println(e.toString());
         }
