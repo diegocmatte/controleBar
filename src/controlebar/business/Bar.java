@@ -7,6 +7,9 @@ package controlebar.business;
 
 import controlebar.persistence.Cliente;
 import controlebar.persistence.Socio;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +20,7 @@ import java.util.Scanner;
 public class Bar {
 
     private ArrayList<Cliente> listaClientes;
+    private File file = new File("lista.txt");
 
     public Bar(ArrayList<Cliente> listaClientes) {
         listaClientes = new ArrayList<>();
@@ -94,6 +98,7 @@ public class Bar {
         String cpf = sc.next();
         for (Cliente c : listaClientes) {
             if (c.getCpf().equals(cpf)) {
+                registraClientesArquivo();
                 listaClientes.remove(c);
                 break;
             } else {
@@ -101,8 +106,13 @@ public class Bar {
             }
         }
     }
-    
-    public void registraClientesArquivo(){
-        
+
+    public void registraClientesArquivo() {
+        try {
+            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+            output.writeObject(listaClientes);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 }
