@@ -11,11 +11,10 @@ package controlebar.persistence;
  */
 public class Cliente {
     
-    private String nome, cpf;
+    private String nome, cpf, genero;
     private int idade;
-    private Character genero;
 
-    public Cliente(String nome, String cpf, int idade, Character genero) {
+    public Cliente(String nome, String cpf, int idade, String genero) {
         this.nome = nome;
         setCpf(cpf);
         setIdade(idade);
@@ -23,15 +22,25 @@ public class Cliente {
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf.length() == 11 ? cpf : null;
+        //this.cpf = cpf.length() == 11 ? cpf : null;
+        if(cpf.length() != 11){
+            System.out.println("CPF inválido");
+        } else {
+            this.cpf = cpf;
+        }
     }
 
     public void setIdade(int idade) {
         this.idade = idade;
     }
 
-    public void setGenero(Character genero) {
-        this.genero = genero.equals('M') || genero.equals('H') ? genero : null;
+    public void setGenero(String genero) {
+        //this.genero = genero.equals('M') || genero.equals('H') ? genero : null;
+        if(genero.equalsIgnoreCase("M") || genero.equalsIgnoreCase("H")){
+            this.genero = genero;
+        } else {
+            System.out.println("Genero informado inválido.");
+        }
     }
 
     public String getNome() {
@@ -46,10 +55,13 @@ public class Cliente {
         return idade;
     }
 
-    public Character getGenero() {
+    public String getGenero() {
         return genero;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "Nome=" + nome + ", CPF=" + cpf + ", Idade=" + idade + ", Genero=" + genero + '}';
+    }
     
 }

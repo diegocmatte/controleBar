@@ -25,38 +25,39 @@ public class ControleBar {
         String cpf;
         
         do{
-            System.out.println("--- Menu de opções ---");
+            System.out.println("--- Inicio das opções ---");
             System.out.println("1 - Registrar entrada de cliente");
             System.out.println("2 - Pesquiar cliente por CPF");
             System.out.println("3 - Exibir sócios presentes");
+            System.out.println("4 - Exibir percentual homens e mulheres presentes");
             System.out.println("7 - Exibir clientes presentes");
             System.out.println("8 - Registrar saída de cliente");
-            System.out.println("9 - Sair do sistema");
-            System.out.println("---------");
+            //System.out.println("9 - Encerrar o dia");
+            System.out.println("0 - Sair do sistema");
+            System.out.println("--- Fim das opções ---\n");
             System.out.print("Digite a sua opção: ");
             opcao = sc.nextInt();
-            System.out.print("---------\n\n");
+            System.out.println("");
             
             switch(opcao){
                 case 1:
                     bar.registraEntrada();
                     break;
                 case 2:
-                    System.out.print("Digite o cpf (somente números): ");
-                    cpf = sc.next();
-                    bar.pesquisaClienteCpf(cpf);
+                    bar.pesquisaClienteCpf();
                     break;
                 case 3:
                     bar.quantosSocios();
                     break;
+                case 4:
+                    bar.distribuicaoGenero();
                 case 7:
                     bar.exibirClientesETotalClientes();
                     break;
                 case 8:
-                    System.out.print("Digite o CPF (apenas números): ");
-                    cpf = sc.next();
-                    bar.registraSaida(cpf);
-                case 9:
+                    bar.registraSaida();
+                    break;
+                case 0:
                     System.out.println("--- Fim da execução ---");
                     System.exit(opcao);
                     break;

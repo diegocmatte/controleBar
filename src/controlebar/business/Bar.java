@@ -22,15 +22,21 @@ public class Bar {
 
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Cliente> listaClientesSaida;
-    private final File file = new File("lista.txt");
+    private Scanner sc = new Scanner(System.in);
+    private File file = new File("lista.txt");
 
+    /**
+     * Método construtor da classe Bar
+     */
     public Bar() {
         listaClientes = new ArrayList<>();
         listaClientesSaida = new ArrayList<>();
     }
 
+    /**
+     * Método que faz o registro a cada cliente que entrar no bar
+     */
     public void registraEntrada() {
-        Scanner sc = new Scanner(System.in);
         System.out.print("Digite o seu nome: ");
         String nome = sc.next();
         System.out.print("Digite seu CPF (apenas números): ");
@@ -38,9 +44,9 @@ public class Bar {
         System.out.print("Digite sua idade: ");
         int idade = sc.nextInt();
         System.out.print("Digite o seu genero (H/M): ");
-        Character genero = sc.next().charAt(0);
+        String genero = sc.next();
 
-        System.out.println("Deseja colocar no programa de milhagens (S/N)?: ");
+        System.out.print("Deseja colocar no programa de milhagens (S/N)?: ");
         String resposta = sc.next();
         if (resposta.equalsIgnoreCase("s")) {
             System.out.print("Digite o número de sócio: ");
@@ -49,73 +55,108 @@ public class Bar {
         } else {
             listaClientes.add(new Cliente(nome, cpf, idade, genero));
         }
+        System.out.println("");
     }
 
+    /**
+     * Método que mostra o nome dos clientes e o número de total presentes
+     */
     public void exibirClientesETotalClientes() {
-        if (listaClientes.size() <= 0) {
-            System.out.print("não há clientes no momento.");
-        } else {
+        if (validaLista()) {
             for (int i = 0; i < listaClientes.size(); i++) {
-                System.out.print(listaClientes.get(i).toString());
+                System.out.println(listaClientes.get(i).toString());
             }
-            System.out.print("Numero de clientes presentes: " + listaClientes.size());
+            System.out.println("Numero de clientes presentes: " + listaClientes.size());
+            System.out.println("");
         }
     }
 
-    public void pesquisaClienteCpf(String cpf) {
-        for (Cliente c : listaClientes) {
-            if (c.getCpf().equals(cpf)) {
-                System.out.println("Cliente está presente.");
-                break;
-            } else {
-                System.out.println("Não há clientes com o CPF informado.");
+    /**
+     * Método que pesquisa um cliente a partir do seu CPF
+     */
+    public void pesquisaClienteCpf() {
+        if (validaLista()) {
+            System.out.print("Digite o CPF (apenas números): ");
+            String cpf = sc.next();
+            for (Cliente c : listaClientes) {
+                if (c.getCpf().equals(cpf)) {
+                    System.out.println("Cliente está presente.");
+                    break;
+                } else {
+                    System.out.println("Não há clientes com o CPF informado.");
+                }
             }
+            System.out.println("");
         }
     }
 
+    /**
+     * Método que exibie o percentual de homens e mulheres presentes
+     */
     public void distribuicaoGenero() {
-        int nroM = 0, nroH = 0;
-        for (Cliente c : listaClientes) {
-            if (c.getGenero().equals('H')) {
-                nroH++;
-            } else {
-                nroM++;
+        if (validaLista()) {
+            float nroM = 0, nroH = 0;
+            for (Cliente c : listaClientes) {
+                if (c.getGenero().equalsIgnoreCase("H")) {
+                    nroH++;
+                }
+                if (c.getGenero().equalsIgnoreCase("m")) {
+                    nroM++;
+                }
             }
-        }
-        float percentualHomens = (float) nroH / listaClientes.size();
-        float percentualMulheres = (float) nroM / listaClientes.size();
+            float percentualHomens = (nroH / listaClientes.size()) * 100;
+            float percentualMulheres = (nroM / listaClientes.size()) * 100;
 
-        System.out.print("Percentual de homens: " + percentualHomens);
-        System.out.println("Percentual de mulheres: " + percentualMulheres);
+            System.out.println("Percentual de homens: " + percentualHomens);
+            System.out.println("Percentual de mulheres: " + percentualMulheres);
+            System.out.println("");
+        }
     }
 
+    /**
+     * Método que mostra quantos sócios estão presentes no momento
+     */
     public void quantosSocios() {
-        int nroSocios = 0;
-        for (Cliente c : listaClientes) {
-            if (c instanceof Socio) {
-                nroSocios++;
+        if (validaLista()) {
+            int nroSocios = 0;
+            for (Cliente c : listaClientes) {
+                if (c instanceof Socio) {
+                    nroSocios++;
+                }
             }
-        }
-        if (nroSocios >= 1) {
-            System.out.print("Número de sócios presentes: " + nroSocios);
-        } else {
-            System.out.print("Não há sócios no momento.");
-        }
-    }
-
-    public void registraSaida(String cpf) {
-        for (Cliente c : listaClientes) {
-            if (c.getCpf().equals(cpf)) {
-                //registraClientesArquivo();
-                listaClientesSaida.add(c);
-                listaClientes.remove(c);
-                break;
+            if (nroSocios >= 1) {
+                System.out.println("Número de sócios presentes: " + nroSocios);
             } else {
-                System.out.print("Cliente não localizado");
+                System.out.println("Não há sócios no momento. Apenas clientes.");
             }
+            System.out.println("");
         }
     }
 
+    /**
+     * Método que registra a saída de um cliente e insere o mesmo numa nova lista para fazer balanço no final de cada dia
+     */
+    public void registraSaida() {
+        if (validaLista()) {
+            System.out.print("Digite o CPF (apenas números): ");
+            String cpf = sc.next();
+            for (Cliente c : listaClientes) {
+                if (c.getCpf().equals(cpf)) {
+                    //registraClientesArquivo();
+                    listaClientesSaida.add(c);
+                    listaClientes.remove(c);
+                    break;
+                } else {
+                    System.out.println("Cliente não localizado.");
+                }
+            }
+            System.out.println("");
+        }
+    }
+
+    /**
+     * Método que registra os clientes num arquivo. Ainda não está pronto
+     */
     public void registraClientesArquivo() {
         try {
             ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
@@ -123,6 +164,20 @@ public class Bar {
             output.writeObject(listaClientesSaida);
         } catch (IOException e) {
             System.out.println(e.toString());
+        }
+    }
+
+    /**
+     * Método que valida se já existe cliente na lista
+     *
+     * @return true se existir clientes, false se lista estiver vazia
+     */
+    public boolean validaLista() {
+        if (listaClientes.size() > 0) {
+            return true;
+        } else {
+            System.out.println("Não há clientes no momento.\n");
+            return false;
         }
     }
 }

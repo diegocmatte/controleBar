@@ -9,11 +9,11 @@ package controlebar.persistence;
  *
  * @author 08104810
  */
-public class Socio extends Cliente{
-    
+public class Socio extends Cliente {
+
     private int numero;
-    
-    public Socio(String nome, String cpf, int idade, Character genero, int numero) {
+
+    public Socio(String nome, String cpf, int idade, String genero, int numero) {
         super(nome, cpf, idade, genero);
         this.numero = numero;
     }
@@ -24,7 +24,7 @@ public class Socio extends Cliente{
 
     @Override
     public String toString() {
-        return "Socio{" + "numero=" + numero + '}';
+        return "Socio{" + super.toString() + ", Número do associado=" + numero + '}';
     }
-    
+
 }
