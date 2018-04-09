@@ -1,0 +1,1 @@
+Cliente{Nome=diego, CPF=11111111111, Idade=23, Genero=h}

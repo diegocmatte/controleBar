@@ -7,12 +7,13 @@ package controlebar.business;
 
 import controlebar.persistence.Cliente;
 import controlebar.persistence.Socio;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +24,6 @@ public class Bar {
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Cliente> listaClientesSaida;
     private Scanner sc = new Scanner(System.in);
-    private File file = new File("lista.txt");
 
     /**
      * Método construtor da classe Bar
@@ -52,8 +52,10 @@ public class Bar {
             System.out.print("Digite o número de sócio: ");
             int nroSocio = sc.nextInt();
             listaClientes.add(new Socio(nome, cpf, idade, genero, nroSocio));
+            listaClientesSaida.add(new Socio(nome, cpf, idade, genero, nroSocio));
         } else {
             listaClientes.add(new Cliente(nome, cpf, idade, genero));
+            listaClientesSaida.add(new Cliente(nome, cpf, idade, genero));
         }
         System.out.println("");
     }
@@ -142,8 +144,6 @@ public class Bar {
             String cpf = sc.next();
             for (Cliente c : listaClientes) {
                 if (c.getCpf().equals(cpf)) {
-                    //registraClientesArquivo();
-                    listaClientesSaida.add(c);
                     listaClientes.remove(c);
                     break;
                 } else {
@@ -156,14 +156,20 @@ public class Bar {
 
     /**
      * Método que registra os clientes num arquivo. Ainda não está pronto
+     *
+     * 1
      */
     public void registraClientesArquivo() {
         try {
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
-            output.writeObject(listaClientes);
-            output.writeObject(listaClientesSaida);
-        } catch (IOException e) {
-            System.out.println(e.toString());
+            BufferedWriter out = new BufferedWriter(new FileWriter("clientesDoDia.txt"));
+            for (Cliente c : listaClientesSaida) {
+                out.write(c.toString());
+                out.newLine();
+            }
+            out.close();
+            System.out.println("Os dados dos clientes foram salvos.");
+        } catch (IOException ex) {
+            Logger.getLogger(Bar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
