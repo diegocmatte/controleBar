@@ -131,12 +131,12 @@ public class Bar {
             } else {
                 System.out.println("Não há sócios no momento. Apenas clientes.");
             }
-            System.out.println("");
+            System.out.println(""); 
         }
     }
 
     /**
-     * Método que registra a saída de um cliente e insere o mesmo numa nova lista para fazer balanço no final de cada dia
+     * Método que registra a saída de um cliente
      */
     public void registraSaida() {
         if (validaLista()) {
@@ -155,21 +155,22 @@ public class Bar {
     }
 
     /**
-     * Método que registra os clientes num arquivo. Ainda não está pronto
+     * Método que registra os clientes do dia num arquivo.
      *
-     * 1
      */
     public void registraClientesArquivo() {
-        try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("clientesDoDia.txt"));
-            for (Cliente c : listaClientesSaida) {
-                out.write(c.toString());
-                out.newLine();
+        if (validaLista()) {
+            try {
+                BufferedWriter out = new BufferedWriter(new FileWriter("clientesDoDia.txt"));
+                for (Cliente c : listaClientesSaida) {
+                    out.write(c.toString());
+                    out.newLine();
+                }
+                out.close();
+                System.out.println("Os dados dos clientes foram salvos.");
+            } catch (IOException ex) {
+                Logger.getLogger(Bar.class.getName()).log(Level.SEVERE, null, ex);
             }
-            out.close();
-            System.out.println("Os dados dos clientes foram salvos.");
-        } catch (IOException ex) {
-            Logger.getLogger(Bar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
