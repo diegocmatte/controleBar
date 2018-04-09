@@ -69,18 +69,9 @@ public class JanelaControleBar extends javax.swing.JFrame {
 
     private void registrarClienteBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarClienteBotaoActionPerformed
         // TODO add your handling code here:
-        JFrame JanelaRegistraEntrada = new JFrame();
-        JanelaRegistraEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        JanelaRegistraEntrada.setSize(640, 480);
-        JanelaRegistraEntrada.setVisible(true);
+        JanelaRegistroEntrada jre = new JanelaRegistroEntrada();
+        jre.setVisible(true);
         
-        JLabel nomeLabel, idadeLabel, cpfLabel, generoLabel;
-        JTextField nomeTexto, idadeTexto, cpfTexto, generoTexto;
-        
-        JanelaRegistraEntrada.add(nomeLabel = new JLabel("Nome: "));
-        JanelaRegistraEntrada.add(nomeTexto = new JTextField("digite o nome"));
-        nomeTexto.setSize(10, 10);
-        nomeLabel.setSize(10, 10);
 
     }//GEN-LAST:event_registrarClienteBotaoActionPerformed
 
