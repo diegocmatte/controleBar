@@ -6,10 +6,8 @@
 package controlebar.uinterface;
 
 import controlebar.business.Bar;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import controlebar.persistence.Cliente;
+
 
 /**
  *
@@ -17,11 +15,13 @@ import javax.swing.JTextField;
  */
 public class JanelaControleBar extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 5662425693593388528L;
+
     /**
      * Creates new form JanelaControleBar
      */
     
-    Bar bar = new Bar();
+    
     
     public JanelaControleBar() {
         initComponents();
@@ -75,6 +75,10 @@ public class JanelaControleBar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_registrarClienteBotaoActionPerformed
 
+    public void registraCliente(Cliente c){
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -107,6 +111,7 @@ public class JanelaControleBar extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JanelaControleBar().setVisible(true);
+                
             }
         });
     }
