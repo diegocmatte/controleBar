@@ -5,8 +5,6 @@
  */
 package controlebar.uinterface;
 
-import controlebar.business.Bar;
-import controlebar.persistence.Cliente;
 
 
 /**
@@ -20,8 +18,7 @@ public class JanelaControleBar extends javax.swing.JFrame {
     /**
      * Creates new form JanelaControleBar
      */
-    
-    
+
     
     public JanelaControleBar() {
         initComponents();
@@ -35,6 +32,10 @@ public class JanelaControleBar extends javax.swing.JFrame {
     private void initComponents() {
 
         javax.swing.JButton registrarClienteBotao = new javax.swing.JButton();
+        encerrarBotao = new javax.swing.JButton();
+        registrarSaida = new javax.swing.JButton();
+        exibirClientesSociosBotao = new javax.swing.JButton();
+        exibirGeneroBotao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de acesso ao bar");
@@ -47,21 +48,53 @@ public class JanelaControleBar extends javax.swing.JFrame {
             }
         });
 
+        encerrarBotao.setText("Encerrar sistema");
+        encerrarBotao.setActionCommand("encerrarBotao");
+        encerrarBotao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                encerrarBotaoActionPerformed(evt);
+            }
+        });
+
+        registrarSaida.setText("Registrar saída");
+        registrarSaida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarSaidaActionPerformed(evt);
+            }
+        });
+
+        exibirClientesSociosBotao.setText("Exibir clientes e sócios");
+
+        exibirGeneroBotao.setText("Exibir por genero");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(registrarClienteBotao, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(exibirGeneroBotao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(exibirClientesSociosBotao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(registrarSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(encerrarBotao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(registrarClienteBotao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(35, 35, 35)
                 .addComponent(registrarClienteBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(372, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(registrarSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(exibirClientesSociosBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(exibirGeneroBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(encerrarBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -75,9 +108,20 @@ public class JanelaControleBar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_registrarClienteBotaoActionPerformed
 
-    public void registraCliente(Cliente c){
-        
-    }
+    private void encerrarBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encerrarBotaoActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        if(javax.swing.JOptionPane.showConfirmDialog(null,"Deseja Fechar?","ATENÇÂO ",javax.swing.JOptionPane.YES_NO_OPTION )==0){  
+                this.dispose();
+                System.exit(0);
+        }
+    }//GEN-LAST:event_encerrarBotaoActionPerformed
+
+    private void registrarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarSaidaActionPerformed
+        // TODO add your handling code here:
+        JanelaRegistroSaida jrs = new JanelaRegistroSaida();
+        jrs.setVisible(true);
+    }//GEN-LAST:event_registrarSaidaActionPerformed
     
     /**
      * @param args the command line arguments
@@ -117,5 +161,9 @@ public class JanelaControleBar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton encerrarBotao;
+    private javax.swing.JButton exibirClientesSociosBotao;
+    private javax.swing.JButton exibirGeneroBotao;
+    private javax.swing.JButton registrarSaida;
     // End of variables declaration//GEN-END:variables
 }
