@@ -151,7 +151,7 @@ public class JanelaControleBar extends javax.swing.JFrame {
 
     private void exibirGeneroBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exibirGeneroBotaoActionPerformed
         // TODO add your handling code here:
-        javax.swing.JOptionPane.showConfirmDialog(null,""+getBar().numeroClientesPorGenero(),"Número de Clientes por genero ",javax.swing.JOptionPane.CLOSED_OPTION );
+        javax.swing.JOptionPane.showConfirmDialog(null,""+getBar().numeroClientesPorGeneroString(),"Número de Clientes por genero ",javax.swing.JOptionPane.CLOSED_OPTION );
     }//GEN-LAST:event_exibirGeneroBotaoActionPerformed
     
     /**

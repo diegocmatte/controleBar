@@ -5,6 +5,7 @@
  */
 package controlebar.controller;
 
+import controlebar.business.Bar;
 import controlebar.persistence.Cliente;
 import controlebar.persistence.Socio;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  */
 public class BarController {
     private ArrayList<Cliente> lista;
+    Bar bar;
     
     
     public BarController() {
@@ -66,20 +68,8 @@ public class BarController {
         return numeroPorGenero;
     }
     
-    public String numeroClientesPorGenero(){
-        int percentualMasculino = 0;
-        int percentualFeminino = 0;
-        for(Cliente cli: lista){
-            if(cli.getGenero().equalsIgnoreCase("m")){
-                percentualMasculino++;
-            }
-        }
-        for(Cliente cli: lista){
-            if(cli.getGenero().equalsIgnoreCase("f")){
-                percentualFeminino++;
-            }
-        }
-        return "Homens: "+percentualMasculino + "\nMulheres: " +percentualFeminino;
+    public String numeroClientesPorGeneroString(){
+        return bar.numeroClientesPorGeneroString();
     }
     
     public boolean containsCliente(String cpf){

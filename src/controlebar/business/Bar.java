@@ -91,6 +91,22 @@ public class Bar {
             System.out.println("");
         }
     }
+    
+    public String numeroClientesPorGeneroString(){
+        int percentualMasculino = 0;
+        int percentualFeminino = 0;
+        for(Cliente cli: listaClientes){
+            if(cli.getGenero().equalsIgnoreCase("m")){
+                percentualMasculino++;
+            }
+        }
+        for(Cliente cli: listaClientes){
+            if(cli.getGenero().equalsIgnoreCase("f")){
+                percentualFeminino++;
+            }
+        }
+        return "Homens: "+percentualMasculino + "\nMulheres: " +percentualFeminino;
+    }
 
     /**
      * Método que exibie o percentual de homens e mulheres presentes
