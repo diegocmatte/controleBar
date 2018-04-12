@@ -80,7 +80,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="registrarSaida">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Registrar sa&#xed;da"/>
+        <Property name="text" type="java.lang.String" value="Registrar sa&#xed;da de cliente"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registrarSaidaActionPerformed"/>
@@ -90,11 +91,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Exibir clientes e s&#xf3;cios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exibirClientesSociosBotaoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="exibirGeneroBotao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exibir por genero"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exibirGeneroBotaoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

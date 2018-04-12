@@ -5,6 +5,9 @@
  */
 package controlebar.uinterface;
 
+import controlebar.controller.BarController;
+import java.util.ArrayList;
+
 
 
 /**
@@ -14,6 +17,7 @@ package controlebar.uinterface;
 public class JanelaControleBar extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 5662425693593388528L;
+    private static BarController bar;
 
     /**
      * Creates new form JanelaControleBar
@@ -22,6 +26,11 @@ public class JanelaControleBar extends javax.swing.JFrame {
     
     public JanelaControleBar() {
         initComponents();
+        bar = new BarController();
+    }
+    
+    public BarController getBar(){
+        return bar;
     }
 
     /**
@@ -56,7 +65,8 @@ public class JanelaControleBar extends javax.swing.JFrame {
             }
         });
 
-        registrarSaida.setText("Registrar saída");
+        registrarSaida.setText("Registrar saída de cliente");
+        registrarSaida.setToolTipText("");
         registrarSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registrarSaidaActionPerformed(evt);
@@ -64,8 +74,18 @@ public class JanelaControleBar extends javax.swing.JFrame {
         });
 
         exibirClientesSociosBotao.setText("Exibir clientes e sócios");
+        exibirClientesSociosBotao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exibirClientesSociosBotaoActionPerformed(evt);
+            }
+        });
 
         exibirGeneroBotao.setText("Exibir por genero");
+        exibirGeneroBotao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exibirGeneroBotaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,9 +122,8 @@ public class JanelaControleBar extends javax.swing.JFrame {
 
     private void registrarClienteBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarClienteBotaoActionPerformed
         // TODO add your handling code here:
-        JanelaRegistroEntrada jre = new JanelaRegistroEntrada();
-        jre.setVisible(true);
-        
+        JanelaRegistroEntrada jre = new JanelaRegistroEntrada(bar);
+        jre.setVisible(true);    
 
     }//GEN-LAST:event_registrarClienteBotaoActionPerformed
 
@@ -119,9 +138,21 @@ public class JanelaControleBar extends javax.swing.JFrame {
 
     private void registrarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarSaidaActionPerformed
         // TODO add your handling code here:
-        JanelaRegistroSaida jrs = new JanelaRegistroSaida();
+        JanelaRegistroSaida jrs = new JanelaRegistroSaida(bar);
         jrs.setVisible(true);
     }//GEN-LAST:event_registrarSaidaActionPerformed
+
+    private void exibirClientesSociosBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exibirClientesSociosBotaoActionPerformed
+        // TODO add your handling code here:
+        ArrayList<String> lista = new ArrayList<String>();
+        lista = getBar().mostraClientes();
+        new JanelaExibeClientes(lista).setVisible(true);
+    }//GEN-LAST:event_exibirClientesSociosBotaoActionPerformed
+
+    private void exibirGeneroBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exibirGeneroBotaoActionPerformed
+        // TODO add your handling code here:
+        javax.swing.JOptionPane.showConfirmDialog(null,""+getBar().numeroClientesPorGenero(),"Número de Clientes por genero ",javax.swing.JOptionPane.CLOSED_OPTION );
+    }//GEN-LAST:event_exibirGeneroBotaoActionPerformed
     
     /**
      * @param args the command line arguments

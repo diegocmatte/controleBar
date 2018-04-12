@@ -5,17 +5,24 @@
  */
 package controlebar.uinterface;
 
+import controlebar.controller.BarController;
+
 /**
  *
  * @author Diego Cansi Matte <diego.cansi at ibm.com>
  */
 public class JanelaRegistroSaida extends javax.swing.JFrame {
+    
+    private static BarController bar;
+    private static final long serialVersionUID = -7464911646289964837L;
 
     /**
      * Creates new form JanelaRegistroSaida
+     * @param bar
      */
-    public JanelaRegistroSaida() {
+    public JanelaRegistroSaida(BarController bar) {
         initComponents();
+        this.bar = bar;
     }
 
     /**
@@ -29,7 +36,6 @@ public class JanelaRegistroSaida extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         removerBotao = new javax.swing.JButton();
         cancelarBotao = new javax.swing.JButton();
-        confirmacaoTexto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,6 +48,11 @@ public class JanelaRegistroSaida extends javax.swing.JFrame {
         jLabel1.setText("Digite o CPF do cliente:");
 
         removerBotao.setText("Remover");
+        removerBotao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerBotaoActionPerformed(evt);
+            }
+        });
 
         cancelarBotao.setText("Cancelar");
         cancelarBotao.addActionListener(new java.awt.event.ActionListener() {
@@ -57,19 +68,14 @@ public class JanelaRegistroSaida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(cpfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(removerBotao)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelarBotao)))
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(confirmacaoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))))
+                    .addComponent(jLabel1)
+                    .addComponent(cpfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(removerBotao)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelarBotao)))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,9 +88,7 @@ public class JanelaRegistroSaida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(removerBotao)
                     .addComponent(cancelarBotao))
-                .addGap(18, 18, 18)
-                .addComponent(confirmacaoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,10 +103,20 @@ public class JanelaRegistroSaida extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cancelarBotaoActionPerformed
 
+    private void removerBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerBotaoActionPerformed
+        // TODO add your handling code here:
+        if(bar.containsCliente(cpfCampo.getText())){
+            bar.removeCliente(cpfCampo.getText());
+            javax.swing.JOptionPane.showConfirmDialog(null,"CPF removido do estabelecimento.","ATENÇÃO ",javax.swing.JOptionPane.CLOSED_OPTION );
+            this.dispose();
+        } else {
+            javax.swing.JOptionPane.showConfirmDialog(null,"CPF Não encontrado no estabelecimento ou ausente.","ATENÇÃO ",javax.swing.JOptionPane.CLOSED_OPTION );
+        }
+    }//GEN-LAST:event_removerBotaoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarBotao;
-    private javax.swing.JLabel confirmacaoTexto;
     private javax.swing.JTextField cpfCampo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton removerBotao;
