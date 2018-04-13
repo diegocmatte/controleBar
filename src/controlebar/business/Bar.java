@@ -91,21 +91,20 @@ public class Bar {
             System.out.println("");
         }
     }
-    
-    public String numeroClientesPorGeneroString(){
-        int percentualMasculino = 0;
-        int percentualFeminino = 0;
-        for(Cliente cli: listaClientes){
-            if(cli.getGenero().equalsIgnoreCase("m")){
-                percentualMasculino++;
+
+    public String numeroClientesPorGeneroString() {
+        float nroM = 0, nroH = 0;
+        for (Cliente c : listaClientes) {
+            if (c.getGenero().equalsIgnoreCase("H")) {
+                nroH++;
+            }
+            if (c.getGenero().equalsIgnoreCase("m")) {
+                nroM++;
             }
         }
-        for(Cliente cli: listaClientes){
-            if(cli.getGenero().equalsIgnoreCase("f")){
-                percentualFeminino++;
-            }
-        }
-        return "Homens: "+percentualMasculino + "\nMulheres: " +percentualFeminino;
+        float percentualHomens = (nroH / listaClientes.size()) * 100;
+        float percentualMulheres = (nroM / listaClientes.size()) * 100;
+        return "Homens: " + percentualHomens + "%\nMulheres: " + percentualMulheres + "%";
     }
 
     /**
@@ -147,7 +146,7 @@ public class Bar {
             } else {
                 System.out.println("Não há sócios no momento. Apenas clientes.");
             }
-            System.out.println(""); 
+            System.out.println("");
         }
     }
 

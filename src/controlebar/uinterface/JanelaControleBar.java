@@ -73,7 +73,7 @@ public class JanelaControleBar extends javax.swing.JFrame {
             }
         });
 
-        exibirClientesSociosBotao.setText("Exibir clientes e sócios");
+        exibirClientesSociosBotao.setText("Exibir clientes presentes");
         exibirClientesSociosBotao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exibirClientesSociosBotaoActionPerformed(evt);

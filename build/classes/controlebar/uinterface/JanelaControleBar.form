@@ -89,7 +89,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="exibirClientesSociosBotao">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Exibir clientes e s&#xf3;cios"/>
+        <Property name="text" type="java.lang.String" value="Exibir clientes presentes"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exibirClientesSociosBotaoActionPerformed"/>
